@@ -137,7 +137,7 @@ class LinkedList(object):
         """
         Delete the first element of the list.
         If length of list is None, leave as None.
-        :return:
+        :return: deleted object
         """
         n = self.first
 
@@ -145,11 +145,12 @@ class LinkedList(object):
             new_first = n.next_node
             self.first = new_first
             self.len -= 1
+        return n.element
 
     def delete_last(self):
         """
         Delete the last element of the list
-        :return:
+        :return: deleted object
         """
         prev_node = None
         current_node = self.first
@@ -165,12 +166,13 @@ class LinkedList(object):
                 self.first = None
 
             self.len -= 1
+        return current_node.element
 
     def delete(self, obj):
         """
         Delete obj if it exists
         :param obj: python object to delete
-        :return:
+        :return: deleted object
         :raise: Exception if obj not found
         """
         # find the ndoe
@@ -194,6 +196,7 @@ class LinkedList(object):
 
             current_node.next_node = None
             self.len -= 1
+            return current_node.element
         else:
             raise Exception("Cannot delete obj. No node found for obj.")
 

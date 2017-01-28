@@ -1,2 +1,2 @@
 # data_structures
-working through data structures and design patterns in python
+Implementation of various data structures in python using Lewis and Chase Java Software Structures as a reference
