@@ -8,7 +8,9 @@ from abc import ABCMeta, abstractmethod
 # --------------------------------
 class StackABC(metaclass=ABCMeta):
     """
-    The stack abc provides the api for a stack datastructure
+    The stack abc provides the api for a stack data structure
+
+    It also supports the python methods len() and next()
     """
     @abstractmethod
     def push(self, x):
@@ -54,6 +56,22 @@ class StackABC(metaclass=ABCMeta):
         """
         return
 
+    @abstractmethod
+    def __iter__(self):
+        """
+        Provide support for iteration.
+        Should either return a generator,
+        or define __iter__ and __next__
+        """
+        pass
+
+    @abstractmethod
+    def __len__(self):
+        """
+        Provide support for python's len method
+        """
+        pass
+
 
 # ----------------------------------------
 # Implementation: ArrayStack
@@ -65,6 +83,13 @@ class ArrayStack(StackABC):
     """
     def __init__(self):
         self.array = []
+
+    def __len__(self):
+        return self.size()
+
+    def __iter__(self):
+        for i in self.array:
+            yield i
 
     def size(self):
         return len(self.array)
