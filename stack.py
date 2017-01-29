@@ -3,12 +3,13 @@ Implement a stack api in python
 """
 from abc import ABCMeta, abstractmethod
 
-# --------------------------------
-# Stack API
-# --------------------------------
+
 from linked_lists import LinkedList
 
 
+# --------------------------------
+# Stack API
+# --------------------------------
 class StackException(Exception):
     """
     StackABC should raise StackException for stack errors such as:
@@ -20,7 +21,7 @@ class StackException(Exception):
 
 class StackABC(metaclass=ABCMeta):  # pragma: no cover
     """
-    The stack abc provides the api for a stack data structure
+    The stack abc provides the api for a stack data structure (LIFO)
 
     It also supports the python methods len() and next()
     """
@@ -94,33 +95,48 @@ class ArrayStack(StackABC):
     using an array for LIFO operations
     """
     def __init__(self):
-        self.array = []
+        self._array = []
 
     def __len__(self):
         return self.size()
 
     def __iter__(self):
-        for i in self.array:
+        for i in self._array:
             yield i
 
     def size(self):
-        return len(self.array)
+        """
+        Return the number of elements in the stack
+        """
+        return len(self._array)
 
     def peek(self):
+        """
+        Return the top element on the stack
+        """
         try:
-            return self.array[self.size()-1]
+            return self._array[self.size()-1]
         except IndexError:
             raise StackException("Cannot peek into empty stack")
 
     def push(self, x):
-        self.array.append(x)
+        """
+        Add a new element x to the top of the stack
+        """
+        self._array.append(x)
 
     def is_empty(self):
-        return False if self.array else True
+        """
+        Return True if empty stack else False
+        """
+        return False if self._array else True
 
     def pop(self):
+        """
+        Remove the first element from the stack and return it
+        """
         try:
-            return self.array.pop()
+            return self._array.pop()
         except IndexError:
             raise StackException("Cannot pop from empty stack")
 
@@ -134,46 +150,55 @@ class LinkedListStack(StackABC):
     using a linked list for LIFO operations
     """
     def __init__(self):
-        self.list = LinkedList()
+        self._list = LinkedList()
 
     def __len__(self):
         return self.size()
 
     def __iter__(self):
-        for i in self.list:
+        for i in self._list:
             yield i
 
     def size(self):
-        return len(self.list)
+        """
+        Return number of items in stack
+        """
+        return len(self._list)
 
     def peek(self):
         """
         Return the obj, but leave it on the stack
-        :return:
+        :return: object
+        :raise: StackException
         """
-        if self.list.first:
-            return self.list.first.element
+        if self._list.first:
+            return self._list.first.element
         else:
             raise StackException("Cannot peek into empty stack")
 
     def push(self, x):
         """
-        Always push from front of list
+        Add element x to top of stack
         :param x: object to push on stack
         :return:
         """
-        self.list.insert_first(x)
+        self._list.insert_first(x)
 
     def is_empty(self):
-        return False if len(self.list) else True
+        """
+        Return True if empty stack else False
+        :return: True/False
+        """
+        return False if len(self._list) else True
 
     def pop(self):
         """
-        Pop newest object and return it
-        :return: newest object or None
+        Remove element from top of stack and return it
+        :return: newest object
+        :raise: StackException
         """
-        if len(self.list):
-            return self.list.delete_first()
+        if len(self._list):
+            return self._list.delete_first()
         else:
             raise StackException("Cannot pop from empty stack")
 

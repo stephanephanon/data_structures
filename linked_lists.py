@@ -39,8 +39,15 @@ class LinkedList(object):
     Our linked list allows addition/removal of objects to the list.
     """
     def __init__(self):
+        """
+        --first: pointer to first Node
+        --len: number of elements in list
+        --last: pointer to last Node
+        :return:
+        """
         self.first = None
         self.len = 0
+        self.last = None
 
     def __iter__(self):
         """
@@ -72,6 +79,11 @@ class LinkedList(object):
         old_first = self.first
         node.next_node = old_first
         self.first = node
+
+        # very first entry, set self.first=Node, self.last=Node
+        if old_first is None:
+            self.last = self.first
+
         self.len += 1
 
     def _find_node(self, start_node, obj):
@@ -111,6 +123,11 @@ class LinkedList(object):
             new_node = Node(element=new_obj)
             new_node.next_node = current_node.next_node
             current_node.next_node = new_node
+
+            # move last pointer if at the end
+            if new_node.next_node is None:
+                self.last = new_node
+
             self.len += 1
         else:
             raise Exception("Cannot insert new_obj. No node found for obj.")
@@ -127,10 +144,12 @@ class LinkedList(object):
         if n is None:
             n = Node(element=obj)
             self.first = n
+            self.last = n
         else:
             while n.next_node:
                 n = n.next_node
             n.next_node = new_node
+            self.last = new_node
         self.len += 1
 
     def delete_first(self):
@@ -144,6 +163,11 @@ class LinkedList(object):
         if n:
             new_first = n.next_node
             self.first = new_first
+
+            # update if empty
+            if self.first is None:
+                self.last = self.first
+
             self.len -= 1
         return n.element
 
@@ -162,8 +186,11 @@ class LinkedList(object):
 
             if prev_node:
                 prev_node.next_node = None
+                self.last = prev_node
             else:
+                # we deleted the only node
                 self.first = None
+                self.last = None
 
             self.len -= 1
         return current_node.element
@@ -189,10 +216,15 @@ class LinkedList(object):
 
         # delete the node
         if found:
-            if not prev_node:
+            if prev_node is None:
+                # found first element of list
                 self.first = current_node.next_node
             else:
                 prev_node.next_node = current_node.next_node
+
+            # found last element of list
+            if current_node.next_node is None:
+                self.last = prev_node
 
             current_node.next_node = None
             self.len -= 1
