@@ -1,12 +1,15 @@
+"""
+Implement a list api in python
+"""
 from abc import ABCMeta, abstractmethod, abstractproperty
+
+
+from linked_lists import LinkedList
 
 
 # --------------------------------
 # List APIs
 # --------------------------------
-from linked_lists import LinkedList, Node
-
-
 class ListException(Exception):
     """
     ListABC should raise ListException for list errors such as:
