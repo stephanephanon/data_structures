@@ -102,6 +102,24 @@ class LinkedList(object):
                 n = n.next_node
         return found
 
+    def insert_after_node(self, node, new_obj):
+        """
+        Insert the new obj after this node
+        :param node: existing node
+        :param new_obj: new element to add
+        :return:
+        """
+        new_node = Node(element=new_obj)
+        new_node.next_node = node.next_node
+        node.next_node = new_node
+
+        # move last pointer if at the end
+        if new_node.next_node is None:
+            self.last = new_node
+            self.len += 1
+
+        return
+
     def insert_after(self, obj, new_obj, occurrence=1):
         """
         Insert the new_obj after N occurrences of obj,
@@ -239,10 +257,10 @@ class LinkedList(object):
         :return: return True if exists, else False
         """
         n = self.first
-
-        while n.next_node:
+        while n:
             if n.element == obj:
                 return True
+            n = n.next_node
         return False
 
     def size(self):
