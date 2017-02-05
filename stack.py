@@ -33,7 +33,7 @@ class StackABC(metaclass=ABCMeta):  # pragma: no cover
         :return:
         :raise: TypeError if nothing is pushed
         """
-        return
+        pass
 
     @abstractmethod
     def pop(self):
@@ -42,7 +42,7 @@ class StackABC(metaclass=ABCMeta):  # pragma: no cover
         :return: popped object
         :raise: StackException if nothing to pop
         """
-        return
+        pass
 
     @abstractmethod
     def peek(self):
@@ -51,7 +51,7 @@ class StackABC(metaclass=ABCMeta):  # pragma: no cover
         :return: data about top element
         :raise: StackException if nothing to peek
         """
-        return
+        pass
 
     @abstractmethod
     def is_empty(self):
@@ -59,7 +59,7 @@ class StackABC(metaclass=ABCMeta):  # pragma: no cover
         Return true if empty else false
         :return:
         """
-        return
+        pass
 
     @abstractmethod
     def size(self):
@@ -67,7 +67,7 @@ class StackABC(metaclass=ABCMeta):  # pragma: no cover
         Return the size of the stack
         :return:
         """
-        return
+        pass
 
     @abstractmethod
     def __iter__(self):

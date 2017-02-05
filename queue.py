@@ -33,7 +33,7 @@ class QueueABC(metaclass=ABCMeta):  # pragma: no cover
         :return:
         :raise: TypeError if nothing is queued
         """
-        return
+        pass
 
     @abstractmethod
     def dequeue(self):
@@ -42,7 +42,7 @@ class QueueABC(metaclass=ABCMeta):  # pragma: no cover
         :return: element at front
         :raise: QueueException if empty queue
         """
-        return
+        pass
 
     @abstractmethod
     def first(self):
@@ -51,7 +51,7 @@ class QueueABC(metaclass=ABCMeta):  # pragma: no cover
         :return: first element
         :raise: QueueException if empty queue
         """
-        return
+        pass
 
     @abstractmethod
     def is_empty(self):
@@ -59,7 +59,7 @@ class QueueABC(metaclass=ABCMeta):  # pragma: no cover
         Return true if queue is empty else False
         :return: True or False
         """
-        return
+        pass
 
     @abstractmethod
     def size(self):
@@ -67,7 +67,7 @@ class QueueABC(metaclass=ABCMeta):  # pragma: no cover
         Return the number of elements in the queue
         :return: number of elements
         """
-        return
+        pass
 
 
 # ----------------------------------------
