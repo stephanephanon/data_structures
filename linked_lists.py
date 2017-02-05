@@ -54,7 +54,7 @@ class DoubleNode(Node):
     def previous_node(self, prev_node):
         if prev_node:
             if isinstance(prev_node, Node):
-                self.previous_node = prev_node
+                self._prev_node = prev_node
             else:
                 # bad case. we only accept Nodes and Nones
                 raise Exception("previous_node must be Node instance or None")
@@ -349,7 +349,7 @@ class DoubleLinkedList(object):
         :param: python object to insert
         :return:
         """
-        node = Node(element=obj)
+        node = DoubleNode(element=obj)
         old_first = self.first
         self.first = node
 
@@ -369,7 +369,7 @@ class DoubleLinkedList(object):
         :param obj: a python object
         :return:
         """
-        node = Node(element=obj)
+        node = DoubleNode(element=obj)
         old_last = self.last
         self.last = node
 
@@ -406,7 +406,7 @@ class DoubleLinkedList(object):
         :param new_obj: new element to add
         :return:
         """
-        new_node = Node(element=new_obj)
+        new_node = DoubleNode(element=new_obj)
 
         # update next
         old_next_node = node.next_node
@@ -445,7 +445,7 @@ class DoubleLinkedList(object):
 
         # insert new_obj
         if current_node:
-            new_node = Node(element=new_obj)
+            new_node = DoubleNode(element=new_obj)
             new_node.next_node = current_node.next_node
             current_node.next_node = new_node
 
@@ -471,11 +471,13 @@ class DoubleLinkedList(object):
 
         if n:
             new_first = n.next_node
-            new_first.previous_node = None
             self.first = new_first
 
-            # update if empty
-            if self.first is None:
+            if new_first:
+                # N y; delete N
+                new_first.previous_node = None
+            else:
+                # N; delete N
                 self.last = self.first
 
             self.len -= 1
@@ -492,14 +494,16 @@ class DoubleLinkedList(object):
 
         if n:
             new_last = n.previous_node
-            new_last.next_node = None
             self.last = new_last
 
-            # we emptied the list
-            if self.last is None:
+            if new_last:
+                # y N; delete N
+                new_last.next_node = None
+            else:
+                # N; delete N
                 self.first = self.last
 
-            self.len -=1
+            self.len -= 1
 
         return n.element
 
