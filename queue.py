@@ -12,9 +12,9 @@ from linked_lists import LinkedList
 
 class QueueException(Exception):
     """
-    QueueABC should raise QueueException for stack errors such as:
-    1. no element to peek
-    2. no element to pop
+    QueueABC should raise QueueException for queue errors such as:
+    1. no element for first
+    2. no element to dequeue
     """
     pass
 

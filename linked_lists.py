@@ -110,6 +110,7 @@ class LinkedList(object):
         :param new_obj: new object to add
         :param occurrence: occurrence of obj to insert after
         :return:
+        :raise: Exception if obj is not found
         """
         # find our node (1st, second, whatever)
         start_node = self.first
